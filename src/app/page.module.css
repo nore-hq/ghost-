@@ -2,8 +2,10 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile browsers */
   background-color: var(--color-bg);
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .videoContainer {
@@ -22,7 +24,7 @@
   top: 0;
   left: 0;
   z-index: 1;
-  transform-origin: 50% 90%; /* Center Bottom where the spotlight is */
+  transform-origin: 50% 90%;
   transition: transform 1.5s cubic-bezier(0.8, 0, 0.2, 1);
 }
 
@@ -31,7 +33,7 @@
 }
 
 .videoBg.zoomedIn {
-  transform: scale(1.6); /* The camera dives into the video */
+  transform: scale(1.6);
 }
 
 .videoOverlay {
@@ -52,11 +54,24 @@
   width: 100%;
   height: 100%;
   z-index: 3;
-  pointer-events: none; /* Let clicks pass unless caught by carousel elements */
+  pointer-events: none;
 }
 
 .carouselLayer > * {
   pointer-events: auto;
+}
+
+/* UI visibility — hidden until lights come on */
+.uiHidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+}
+
+.uiVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 1.5s ease;
 }
 
 .header {
@@ -129,6 +144,28 @@
   width: 100%;
 }
 
+/* Skip intro hint */
+.skipHint {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  animation: pulse 2s infinite;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.3; }
+}
+
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .videoBg {
     object-fit: cover;
@@ -138,16 +175,21 @@
     transform: scale(1.8);
   }
   .header {
-    padding: 1.5rem 1.2rem;
+    padding: 1.2rem 1rem;
   }
   .logo {
-    font-size: 1.2rem;
-    letter-spacing: 0.3em;
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
   }
   .inquiry span {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
   .menuIcon {
-    width: 28px;
+    width: 24px;
+    gap: 5px;
+  }
+  .skipHint {
+    bottom: 2rem;
+    font-size: 0.55rem;
   }
 }
