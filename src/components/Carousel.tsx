@@ -15,7 +15,9 @@ function StatItem({ label, value, trigger, delay = 0 }: { label: string, value: 
   const [isCalculating, setIsCalculating] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsCalculating(true);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDisplayValue(0);
     
     let iterations = 0;
@@ -224,24 +226,28 @@ export default function Carousel({ isZoomedIn, onZoomToggle }: CarouselProps) {
                 }}
               >
                 {item.is3D ? (
-                    // @ts-ignore
-                    <model-viewer
-                      src={item.src}
-                      alt={item.name}
-                      auto-rotate
-                      rotation-per-second="30deg"
-                      camera-controls="camera-controls"
-                      interaction-prompt="none"
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        outline: 'none', 
-                        pointerEvents: isActive ? 'auto' : 'none' 
-                      }}
-                      exposure="1.2"
-                      shadow-intensity="1"
-                      environment-image="neutral"
-                    ></model-viewer>
+                    (() => {
+                      const ModelViewer = 'model-viewer' as any;
+                      return (
+                        <ModelViewer
+                          src={item.src}
+                          alt={item.name}
+                          auto-rotate="true"
+                          rotation-per-second="30deg"
+                          camera-controls="camera-controls"
+                          interaction-prompt="none"
+                          style={{ 
+                            width: '100%', 
+                            height: '100%', 
+                            outline: 'none', 
+                            pointerEvents: isActive ? 'auto' : 'none' 
+                          }}
+                          exposure="1.2"
+                          shadow-intensity="1"
+                          environment-image="neutral"
+                        ></ModelViewer>
+                      );
+                    })()
                 ) : (
                   <TiltImage src={item.image as string} alt={item.name} isActive={isActive} isZoomedIn={isZoomedIn} />
                 )}
