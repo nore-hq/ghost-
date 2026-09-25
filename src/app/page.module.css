@@ -130,10 +130,24 @@
 }
 
 @media (max-width: 768px) {
+  .videoBg {
+    object-fit: cover;
+    transform-origin: 50% 50%;
+  }
+  .videoBg.zoomedIn {
+    transform: scale(1.8);
+  }
   .header {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.2rem;
   }
   .logo {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+  }
+  .inquiry span {
+    font-size: 0.6rem;
+  }
+  .menuIcon {
+    width: 28px;
   }
 }

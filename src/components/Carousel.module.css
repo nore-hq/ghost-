@@ -309,102 +309,109 @@
 }
 
 @media (max-width: 768px) {
+  /* Keep container as absolute overlay, don't switch to column */
   .carouselContainer {
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 12vh;
-    padding-bottom: 2rem;
-  }
-  
-  .sidePanel {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    width: 100%;
-    order: 1;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
+    justify-content: center;
   }
 
+  /* Model sits dead center of viewport */
   .zoomWrapper {
-    position: relative;
-    order: 2;
-    flex-grow: 1;
-    align-items: center;
+    margin-bottom: 0;
+  }
+  .zoomWrapper.zoomedOut {
+    transform: scale(0.55) translateY(-5vh);
+    margin-bottom: 0;
+  }
+  .zoomWrapper.zoomedIn {
+    transform: scale(0.85) translateY(0);
     margin-bottom: 0;
   }
 
-  .zoomWrapper.zoomedIn {
-    transform: scale(0.9);
-  }
-  .zoomWrapper.zoomedOut {
-    transform: scale(0.7) translateY(15vh);
-  }
-  
   .stage {
-    width: 300px;
-    height: 250px;
+    width: 320px;
+    height: 280px;
   }
 
-  .thumbnailBar {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    order: 3;
-    width: 100%;
-    padding: 0.5rem;
-    justify-content: center;
-    background: transparent;
-    border: none;
+  .clickHint {
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    bottom: -40px;
+  }
+
+  /* Info panel: sits at the top of the screen */
+  .sidePanel {
+    position: fixed;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    align-items: center;
+    gap: 0.6rem;
   }
 
   .title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     text-align: center;
     max-width: 100%;
+    letter-spacing: 0.15em;
   }
-  
+
   .statsCol {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
   }
-  
+
   .statBox {
-    width: 70px;
+    width: 65px;
     align-items: center;
   }
   .statHeader, .statBar {
-    width: 70px;
+    width: 65px;
   }
   .statLabel {
-    font-size: 0.45rem;
+    font-size: 0.4rem;
   }
   .statValue {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
+
+  /* Hide right-side controls on mobile */
   .controlsPanel {
     display: none;
   }
-  
+
+  /* Thumbnail bar: fixed at the very bottom */
+  .thumbnailBar {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 95vw;
+    padding: 0.5rem 0.8rem;
+    gap: 0.4rem;
+    border-radius: 50px;
+  }
+
   .thumbnail {
-    padding: 0.4rem 0.8rem;
+    padding: 0.35rem 0.7rem;
   }
   .thumbnailText {
-    font-size: 0.5rem;
+    font-size: 0.45rem;
+    letter-spacing: 0.1em;
   }
-  
+
+  /* Performance: strip heavy filters */
   .image {
     filter: none !important;
-    opacity: 0.5;
+    opacity: 0.4;
+    transition: opacity 0.6s ease;
   }
-  
   .activeCard .image {
     opacity: 1;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)) !important;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.7)) !important;
   }
 }
