@@ -310,14 +310,14 @@
 
 @media (max-width: 768px) {
   .zoomWrapper.zoomedIn {
-    transform: scale(0.65) translateY(-50px);
+    transform: scale(1) translateY(-60px);
   }
   .zoomWrapper.zoomedOut {
-    transform: scale(0.3) translateY(50px);
+    transform: scale(0.75) translateY(-30px);
   }
   .stage {
-    width: 250px;
-    height: 180px;
+    width: 320px;
+    height: 250px;
   }
   .sidePanel {
     left: 50%;

@@ -13,11 +13,11 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     // Show loading screen for a few seconds before fading out
     const fadeOutTimer = setTimeout(() => {
       setIsFadingOut(true);
-    }, 2500);
+    }, 1000);
 
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 3500); // 1s for the fade-out animation
+    }, 1800); // 0.8s for the fade-out animation
 
     return () => {
       clearTimeout(fadeOutTimer);
