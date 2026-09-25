@@ -232,6 +232,7 @@ export default function Carousel({ isZoomedIn, onZoomToggle }: CarouselProps) {
                         <ModelViewer
                           src={item.src}
                           alt={item.name}
+                          poster="/images/engine-poster.png"
                           auto-rotate="true"
                           loading="lazy"
                           rotation-per-second="30deg"
@@ -241,7 +242,8 @@ export default function Carousel({ isZoomedIn, onZoomToggle }: CarouselProps) {
                             width: '100%', 
                             height: '100%', 
                             outline: 'none', 
-                            pointerEvents: isActive ? 'auto' : 'none' 
+                            pointerEvents: isActive ? 'auto' : 'none',
+                            '--poster-color': 'transparent'
                           }}
                           exposure="1.2"
                           shadow-intensity="1"
