@@ -233,6 +233,7 @@ export default function Carousel({ isZoomedIn, onZoomToggle }: CarouselProps) {
                           src={item.src}
                           alt={item.name}
                           auto-rotate="true"
+                          loading="lazy"
                           rotation-per-second="30deg"
                           camera-controls="camera-controls"
                           interaction-prompt="none"

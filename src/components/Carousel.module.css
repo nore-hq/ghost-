@@ -309,61 +309,102 @@
 }
 
 @media (max-width: 768px) {
+  .carouselContainer {
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 12vh;
+    padding-bottom: 2rem;
+  }
+  
+  .sidePanel {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    order: 1;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  .zoomWrapper {
+    position: relative;
+    order: 2;
+    flex-grow: 1;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
   .zoomWrapper.zoomedIn {
-    transform: scale(1) translateY(-60px);
+    transform: scale(0.9);
   }
   .zoomWrapper.zoomedOut {
-    transform: scale(0.75) translateY(-30px);
+    transform: scale(0.7) translateY(15vh);
   }
+  
   .stage {
-    width: 320px;
+    width: 300px;
     height: 250px;
   }
-  .sidePanel {
-    left: 50%;
-    top: 15%;
-    transform: translateX(-50%);
-    width: 90%;
-    align-items: center;
-    gap: 0.8rem;
+
+  .thumbnailBar {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    order: 3;
+    width: 100%;
+    padding: 0.5rem;
+    justify-content: center;
+    background: transparent;
+    border: none;
   }
+
   .title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-align: center;
+    max-width: 100%;
   }
+  
   .statsCol {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.8rem;
+    gap: 0.5rem;
   }
+  
   .statBox {
-    width: 80px;
+    width: 70px;
     align-items: center;
   }
   .statHeader, .statBar {
-    width: 80px;
+    width: 70px;
   }
   .statLabel {
-    font-size: 0.5rem;
+    font-size: 0.45rem;
   }
   .statValue {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
   .controlsPanel {
     display: none;
   }
-  .thumbnailBar {
-    width: 95%;
-    overflow-x: auto;
-    padding: 0.6rem 1rem;
-    bottom: 1.5rem;
-    justify-content: flex-start;
-  }
+  
   .thumbnail {
-    padding: 0.4rem 1rem;
+    padding: 0.4rem 0.8rem;
   }
   .thumbnailText {
-    font-size: 0.55rem;
+    font-size: 0.5rem;
+  }
+  
+  .image {
+    filter: none !important;
+    opacity: 0.5;
+  }
+  
+  .activeCard .image {
+    opacity: 1;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)) !important;
   }
 }
