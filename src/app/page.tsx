@@ -8,16 +8,16 @@ export default function Home() {
   const [isZoomedIn, setIsZoomedIn] = useState(false);
   const [showUI, setShowUI] = useState(false);
 
-  // Start video from 0 (lights off). At ~14s the lights are on → reveal UI.
+  // Start video from 10s (lights off). At 14s the lights are on → reveal UI.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.currentTime = 0;
+    video.currentTime = 10;
     video.play().catch(() => {});
 
     const onTimeUpdate = () => {
-      if (video.currentTime >= 13.5 && !showUI) {
+      if (video.currentTime >= 14 && !showUI) {
         setShowUI(true);
       }
     };
