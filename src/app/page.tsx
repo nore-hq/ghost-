@@ -1,69 +1,67 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import { useRef, useEffect, useState } from 'react';
+import Carousel from '@/components/Carousel';
+import styles from './page.module.css';
 
 export default function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const hasStarted = useRef(false);
+  const [isZoomedIn, setIsZoomedIn] = useState(false);
+
+  useEffect(() => {
+    if (videoRef.current && !hasStarted.current) {
+      videoRef.current.currentTime = 14;
+      videoRef.current.play().catch(e => console.log('Autoplay prevented', e));
+      hasStarted.current = true;
+    }
+  }, []);
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current && !hasStarted.current) {
+      videoRef.current.currentTime = 14;
+    }
+  };
+
+  const handleVideoEnded = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 15;
+      videoRef.current.play();
+    }
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className={styles.main}>
+      <div className={styles.videoContainer}>
+        <video 
+          ref={videoRef}
+          className={`${styles.videoBg} ${isZoomedIn ? styles.zoomedIn : styles.zoomedOut}`} 
+          muted 
+          playsInline
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={handleVideoEnded}
+        >
+          <source src="/videos/bg-video.mp4#t=14" type="video/mp4" />
+        </video>
+        
+        <div className={styles.videoOverlay}></div>
+      </div>
+
+      <div className={styles.carouselLayer}>
+        <Carousel isZoomedIn={isZoomedIn} onZoomToggle={() => setIsZoomedIn(!isZoomedIn)} />
+      </div>
+
+      <header className={`${styles.header} ${isZoomedIn ? styles.headerHidden : ''}`}>
+        <div className={styles.menuIcon}>
+          <div className={styles.line}></div>
+          <div className={styles.line}></div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        
+        <h1 className={`${styles.logo} serif`}>NORE</h1>
+        
+        <div className={styles.inquiry}>
+          <span>INQUIRE</span>
         </div>
-      </main>
-    </div>
+      </header>
+    </main>
   );
 }
